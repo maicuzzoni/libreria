@@ -1,0 +1,13 @@
+title{
+    font-family: 'Amatic SC', cursive;
+}
+
+footer{
+background: rgb(0,163,196);
+background: linear-gradient(90deg, rgba(0,163,196,1) 0%, rgba(24,24,128,1) 53%, rgba(82,79,134,1) 100%);
+}
+
+nav{
+background: rgb(0,163,196);
+background: linear-gradient(90deg, rgba(0,163,196,1) 0%, rgba(24,24,128,1) 53%, rgba(82,79,134,1) 100%);
+}

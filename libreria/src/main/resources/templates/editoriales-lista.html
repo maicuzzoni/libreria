@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <title>Lista de autores</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav th:replace="reutil :: navbar"></nav>
+    <br>
+    <div class="container-md">
+        <h1>Lista de editoriales</h1>
+        <div th:if="${editoriales.isEmpty()}">
+            <h4>Todavía no hay editoriales cargadas.</h4>
+        </div>
+        <table class="table">
+            <thead>
+                <tr scope="col">
+                    <th>Nombre</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row" th:each="editoriales : ${editoriales}">
+                    <td th:text="${editoriales.nombre}"></td>
+                    <td>
+                        <a class="btn btn-outline-info" th:href="@{/editoriales/editar/__${editoriales.id}__}">Editar</a>
+                    </td>
+                    <td>
+                        <form method="post" th:action="@{/editoriales/eliminar/__${editoriales.id}__}">
+                            <button class="btn btn-outline-danger" type="submit">Dar de baja</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-info" th:href="@{/editoriales/crear}">Crear nuevo</a>
+    </div>
+<br><br><br>
+    <footer th:replace="reutil :: footer"></footer>
+    <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <title>Lista de autores</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav th:replace="reutil :: navbar"></nav>
+    <br>
+    <div class="container-md">
+        <h1>Lista de autores deshabilitados</h1>
+        <div th:if="${autores.isEmpty()}">
+            <h4>No hay autores deshabilitados</h4>
+        </div>
+        <table class="table">
+            <thead>
+                <tr scope="col">
+                    <th>Nombre</th>
+                    <th>Habilitar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row" th:each="autores : ${autores}">
+                    <td th:text="${autores.nombre}"></td>
+                    <td>
+                        <a class="btn btn-outline-info" th:href="@{/autores/habilitar/__${autores.id}__}">Habilitar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<br><br><br>
+    <footer th:replace="reutil :: footer"></footer>
+    <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

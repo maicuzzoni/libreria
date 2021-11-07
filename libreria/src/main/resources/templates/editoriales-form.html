@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <title>Lista de autores</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <nav th:replace="reutil :: navbar"></nav>
+    <div class="container-md">
+        <br>
+        <h1 th:text="${title}"></h1>
+        <form class="needs-validation" method="post" novalidate th:action="@{/editoriales/__${action}__}" th:object="${editorial}">
+            <label for="nombre">Nombre:</label>
+            <input th:field="*{id}" type="hidden"/>
+            <input th:field="*{alta}" type="hidden"/>
+            <input required th:field="*{nombre}"
+                type="text"
+                id="nombre"
+                name="nombre"
+                placeholder="Ingrese nombre"
+                value="${editorial.nombre}"
+                />
+            <br />
+            <button class="btn btn-outline-danger" th:text="${action == 'guardar'} ? 'Crear' : 'Guardar cambios'" type="submit">Agregar</button>
+        </form>
+
+    </div>
+
+    <footer th:replace="reutil :: footer"></footer>
+    <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+    <script>
+</script>
+</body>
+</html>
+
+
