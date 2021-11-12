@@ -6,6 +6,7 @@ import egg.web.libreria.entidades.Editorial;
 import egg.web.libreria.entidades.Libro;
 import egg.web.libreria.repositorios.LibroRepositorio;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,34 +40,46 @@ public class LibroService {
         repositorio.save(libro);
     }
     
+    @Transactional(readOnly = true)
+    public Libro obtenerPorId(String id){
+        Optional<Libro> libroOptional = repositorio.findById(id);
+        return libroOptional.orElse(null);
+    }
+    
     @Transactional
-    public void modificarLibro(String id, String nombre){ //completar parametros
-        Libro libro = repositorio.findById(id).get(); // busca el libro por id
-        
-        // codigo para modificar
-        
-        repositorio.save(libro);
+    public void modificarLibro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Autor autor, Editorial editorial, Boolean alta){ //completar parametros
+        //Libro libro = repositorio.findById(id).get(); // busca el libro por id
+        repositorio.modificar(id, isbn, titulo, anio, ejemplares, ejemplaresPrestados, ejemplaresRestantes, autor, editorial, alta);
     }
     
     @Transactional(readOnly = true)
     public List<Libro> obtenerLibros(){
-        return repositorio.findAll();
+        return repositorio.mostrarHabilitados();
     }
 
-    public Object obtenerPorId(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    @Transactional
     public void eliminar(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        repositorio.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
     public List<Libro> obtenerDeshabilitados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return repositorio.deshabilitados();
     }
 
+    @Transactional
     public void habilitar(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        repositorio.habilitar(id);
+    }
+    
+    @Transactional
+    public void deshabilitarPorAutor(String idAutor){
+        repositorio.deshabilitarDeAutor(idAutor);
+    }
+    
+    @Transactional
+    public void habilitarPorAutor(String idAutor){
+        repositorio.habilitarDeAutor(idAutor);
     }
 
 }

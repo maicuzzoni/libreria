@@ -1,16 +1,67 @@
 <!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bootstrap</title>
-    <!-- CSS Bootstrap -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <title>Lista de libros</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
     <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+    <!-- CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-  </head>
-  <body>
-    <!-- JS Bootstrap -->
-    <script src="./js/bootstrap.bundle.min.js"></script>
-  </body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav th:replace="reutil :: navbar"></nav>
+    <br>
+    <div class="container-md">
+        <h1>Lista de Libros</h1>
+
+        <table class="table">
+            <thead>
+                <tr scope="col">
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>Editorial</th>
+                    <th>Año</th>
+                    <th>ISBN</th>
+                    <th th:if="${action == 'habilitados'}">Editar</th>
+                    <th th:if="${action == 'habilitados'}">Deshabilitar</th>
+                    <th th:if="${action == 'deshabilitados'}">Habilitar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr scope="row" th:each="libro : ${libros}">
+                    <td th:text="${libro.titulo}"></td>
+                    <td th:text="${libro.autor.nombre}"></td>
+                    <td th:text="${libro.editorial.nombre}"></td>
+                    <td th:text="${libro.anio}"></td>
+                    <td th:text="${libro.isbn}"></td>
+                    <td  th:if="${action == 'habilitados'}">
+                        <a class="btn btn-outline-info" th:href="@{/libros/editar/__${libro.id}__}" >Editar</a>
+                    </td>
+                    <td th:if="${action == 'habilitados'}">
+                        <form method="post" th:action="@{/libros/eliminar/__${libro.id}__}">
+                            <button class="btn btn-outline-danger" type="submit">Dar de baja</button>
+                        </form>
+                    </td>
+                    
+                    <td th:if="${action == 'deshabilitados'}">
+                        <a class="btn btn-outline-info" th:href="@{/libros/habilitar/__${libro.id}__}">Habilitar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="form-floating mb-3 col-xl-6" th:if="${libros.isEmpty()}">
+            <h4>Todavía no hay libros cargados.</h4>
+        </div>
+        <a class="btn btn-info" th:href="@{/libros/crear}" th:if="${action == 'habilitados'}" >Crear nuevo</a>
+    </div>
+<br><br><br>
+    <footer th:replace="reutil :: footer"></footer>
+    <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+</body>
 </html>
+

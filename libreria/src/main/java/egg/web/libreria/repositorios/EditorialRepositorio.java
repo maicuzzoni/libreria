@@ -3,7 +3,6 @@
  */
 package egg.web.libreria.repositorios;
 
-import egg.web.libreria.entidades.Autor;
 import egg.web.libreria.entidades.Editorial;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

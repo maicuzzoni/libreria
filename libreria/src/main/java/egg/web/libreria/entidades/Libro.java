@@ -2,9 +2,11 @@ package egg.web.libreria.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 
 /**
@@ -16,6 +18,8 @@ import org.hibernate.annotations.SQLDelete;
 public class Libro {
 
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     @Column
     private Long isbn;
@@ -39,8 +43,6 @@ public class Libro {
 
     public Libro() {
     }
-    
-    
 
     public Libro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Autor autor, Editorial editorial, Boolean alta) {
         this.id = id;

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Libro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- BOOTSTRAP -->
+        <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+        <!-- CSS -->
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    </head>
+    <body>
+        <nav th:replace="reutil :: navbar"></nav>
+        <div class="container-md">
+            <br>
+            <h1 th:text="${title}"></h1>
+            <form class="needs-validation" method="post" novalidate th:action="@{/libros/__${action}__}" th:object="${libro}">
+
+                <input th:field="*{id}" type="hidden"/>
+                <input th:field="*{alta}" type="hidden"/>
+
+                <div class="form-floating mb-3 col-xl-6">
+
+                    <input class="form-control" required th:field="*{titulo}"
+                           type="text"
+                           id="titulo"
+                           name="titulo"
+                           placeholder="Ingrese el título"
+                           value="${libro.titulo}"
+                           />
+                    <label for="titulo">Título:</label>
+                </div>
+                <div class="invalid-feedback">El título es obligatorio</div>
+
+                <div class="form-floating mb-3 col-xl-6">
+
+                    <input class="form-control" required th:field="*{isbn}"
+                           type="text"
+                           id="isbn"
+                           name="isbn"
+                           placeholder="Ingrese el ISBN"
+                           value="${libro.isbn}"
+                           />
+                    <label for="isbn">ISBN:</label>
+                </div>
+                <div class="form-floating mb-3 col-xl-6">
+                    <select aria-label="Seleccionar autor" class="form-select" id="autor" th:field="*{autor}">
+                        <option selected value="">Elegir autor</option>
+                        <option th:each="autor : ${autores}" th:text="${autor.nombre}"
+                                th:value="${autor.id}"></option>
+                    </select>
+                    <label for="autor">Autor</label>
+                </div>
+
+                <div class="form-floating mb-3 col-xl-6">
+                    <select aria-label="Seleccionar autor" class="form-select" id="editorial" th:field="*{editorial}">
+                        <option selected value="">Elegir editorial</option>
+                        <option th:each="editorial : ${editoriales}" th:text="${editorial.nombre}"
+                                th:value="${editorial.id}"></option>
+                    </select>
+                    <label for="editorial">Editorial</label>
+                </div>
+
+                <div class="form-floating mb-3 col-xl-6">
+
+                    <input class="form-control" required th:field="*{anio}"
+                           type="text"
+                           id="anio"
+                           name="anio"
+                           placeholder="Ingrese el año"
+                           value="${libro.anio}"
+                           />
+                    <label for="anio">Año:</label>
+                </div>
+
+                <div class="form-floating mb-3 col-xl-6">
+                    <input class="form-control" required th:field="*{ejemplares}"
+                           type="text"
+                           id="ejemplares"
+                           name="ejemplares"
+                           placeholder="Ingrese cantidad de ejemplares"
+                           value="${libro.ejemplares}"
+                           />
+                    <label for="ejemplares">Ejemplares:</label>
+                </div>
+
+                <div class="form-floating mb-3 col-xl-6">
+
+                    <input class="form-control" required th:field="*{ejemplaresPrestados}"
+                           type="text"
+                           id="ejemplaresPrestados"
+                           name="ejemplaresPrestados"
+                           placeholder="Ingrese cantidad de ejemplares prestados"
+                           value="${libro.ejemplaresPrestados}"
+                           />
+                    <label for="ejemplares">Ejemplares prestados:</label>
+                </div>
+
+                <div class="form-floating mb-3 col-xl-6">
+                    <input class="form-control" required th:field="*{ejemplaresRestantes}"
+                           type="text"
+                           id="ejemplaresRestantes"
+                           name="ejemplaresRestantes"
+                           value="${libro.ejemplaresRestantes}"
+                           disabled
+                           />
+                    <label for="ejemplares">Ejemplares disponibles:</label>
+                </div>
+                <button class="btn btn-outline-danger" th:text="${action == 'guardar'} ? 'Crear' : 'Guardar cambios'" type="submit">Agregar Libro</button>
+            </form>
+            <br><br><br>
+            <footer th:replace="reutil :: footer"></footer>
+            <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+            <script>
+            </script>
+    </body>
+</html>
+
+
+
