@@ -27,6 +27,7 @@
             <thead>
                 <tr scope="col">
                     <th>Nombre</th>
+                    <th>Libros</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -34,6 +35,9 @@
             <tbody>
                 <tr scope="row" th:each="editoriales : ${editoriales}">
                     <td th:text="${editoriales.nombre}"></td>
+                    <td>
+                        <a class="btn btn-outline-secondary" th:href="@{/editoriales/libros/__${editoriales.id}__}">Ver libros</a>
+                    </td>
                     <td>
                         <a class="btn btn-outline-info" th:href="@{/editoriales/editar/__${editoriales.id}__}">Editar</a>
                     </td>

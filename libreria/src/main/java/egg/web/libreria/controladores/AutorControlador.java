@@ -6,6 +6,7 @@
 package egg.web.libreria.controladores;
 
 import egg.web.libreria.entidades.Autor;
+import egg.web.libreria.entidades.Libro;
 import egg.web.libreria.servicios.AutorService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,16 @@ public class AutorControlador {
         mav.addObject("autores", autores);
         return mav;
     }
+    
+    @GetMapping("/libros/{id}") //Traigo los libros del autor seleccionado
+    public ModelAndView librosDeAutor(@PathVariable String id) {
+        ModelAndView mav = new ModelAndView("libros-lista");
+        List<Libro> libros = servicio.obtenerLibros(id);
+        mav.addObject("libros", libros);
+        mav.addObject("action", "habilitados");
+        return mav;
+    }
+    
     
     @GetMapping("/deshabilitados")
     public ModelAndView mostrarDeshabilitados() {

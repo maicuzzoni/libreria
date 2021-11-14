@@ -4,6 +4,7 @@
 package egg.web.libreria.servicios;
 
 import egg.web.libreria.entidades.Editorial;
+import egg.web.libreria.entidades.Libro;
 import egg.web.libreria.repositorios.EditorialRepositorio;
 import java.util.List;
 import java.util.Optional;
@@ -58,6 +59,11 @@ public class EditorialService {
     @Transactional(readOnly = true)
     public List<Editorial> obtenerDeshabilitadas() {
         return repositorio.deshabilitadas();
+    }
+
+    @Transactional
+    public List<Libro> obtenerLibros(String id) {
+        return repositorio.obtenerLibros(id);
     }
 
 }

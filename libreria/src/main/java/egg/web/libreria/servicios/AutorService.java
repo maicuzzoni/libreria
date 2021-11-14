@@ -3,6 +3,7 @@
  */
 package egg.web.libreria.servicios;
 import egg.web.libreria.entidades.Autor;
+import egg.web.libreria.entidades.Libro;
 import egg.web.libreria.repositorios.AutorRepositorio;
 import java.util.List;
 import java.util.Optional;
@@ -58,4 +59,9 @@ public class AutorService {
     public List<Autor> obtenerDeshabilitados() {
         return repositorio.deshabilitados();
     }
+
+    @Transactional
+    public List<Libro> obtenerLibros(String id) {
+        return repositorio.obtenerLibros(id);
+    }    
 }

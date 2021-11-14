@@ -15,15 +15,20 @@
 <body>
     <nav th:replace="reutil :: navbar"></nav>
     <br>
-    <div class="container-md">
-        <h1>Lista de Libros</h1>
 
-        <table class="table">
+    
+    <div class="container-md mb-3">
+        <h1>Lista de Libros</h1>    
+        <!-- <div class="input-append"> <input type="text" class="input-medium search-query" name="s" placeholder="Search" value=""> <button type="submit" class="add-on">buscar<i class="icon-search"></i></button> </div> -->
+        <table class="table table-striped">
             <thead>
                 <tr scope="col">
                     <th>Titulo</th>
                     <th>Autor</th>
                     <th>Editorial</th>
+                    <th th:if="${action == 'habilitados'}">Ejemplares</th>
+                    <th th:if="${action == 'habilitados'}">Prestados</th>
+                    <th th:if="${action == 'habilitados'}">Disponibles</th>
                     <th>Año</th>
                     <th>ISBN</th>
                     <th th:if="${action == 'habilitados'}">Editar</th>
@@ -36,6 +41,9 @@
                     <td th:text="${libro.titulo}"></td>
                     <td th:text="${libro.autor.nombre}"></td>
                     <td th:text="${libro.editorial.nombre}"></td>
+                    <td th:if="${action == 'habilitados'}" th:text="${libro.ejemplares}"></td>
+                    <td th:if="${action == 'habilitados'}" th:text="${libro.ejemplaresPrestados}"></td>
+                    <td th:if="${action == 'habilitados'}" th:text="${libro.ejemplaresRestantes}"></td>
                     <td th:text="${libro.anio}"></td>
                     <td th:text="${libro.isbn}"></td>
                     <td  th:if="${action == 'habilitados'}">
@@ -43,7 +51,7 @@
                     </td>
                     <td th:if="${action == 'habilitados'}">
                         <form method="post" th:action="@{/libros/eliminar/__${libro.id}__}">
-                            <button class="btn btn-outline-danger" type="submit">Dar de baja</button>
+                            <button class="btn btn-outline-danger" type="submit">Deshabilitar</button>
                         </form>
                     </td>
                     

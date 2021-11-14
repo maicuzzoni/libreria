@@ -1,6 +1,7 @@
 package egg.web.libreria.controladores;
 
 import egg.web.libreria.entidades.Editorial;
+import egg.web.libreria.entidades.Libro;
 import egg.web.libreria.servicios.EditorialService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,16 @@ public class EditorialControlador {
         mav.addObject("editoriales", editoriales);
         return mav;
     }
+    
+        @GetMapping("/libros/{id}") //Traigo los libros del autor seleccionado
+    public ModelAndView librosDeAutor(@PathVariable String id) {
+        ModelAndView mav = new ModelAndView("libros-lista");
+        List<Libro> libros = edServ.obtenerLibros(id);
+        mav.addObject("libros", libros);
+        mav.addObject("action", "habilitados");
+        return mav;
+    }
+    
 
     @GetMapping("/crear")
     public ModelAndView crearEditorial() {

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--
+
+-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lista de autores</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- BOOTSTRAP -->
+        <link rel="stylesheet" th:href="@{/assets/bootstrap.min.css}"/>
+        <!-- CSS -->
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        
+         <nav th:fragment="navbar" class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand">Sistema de prestamos de libros</a>
+        </div>
+    </nav>
+        
+        <div class="container mt-2 main">
+            <div class="row my-auto g-4 justify-content-evenly">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="../img/libros.jpg" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Libros</h5>
+                                <p class="card-text">Ver la lista de libros, ingresar uno nuevo o modificar existente <a class="btn btn-outline-info" th:href="@{/libros/todos}">Ver ></a></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="container mt-2 main">
+            <div class="row my-auto g-4 justify-content-evenly">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="../img/autores.jpg" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Autores</h5>
+                                <p class="card-text">Ver la lista de autores, ingresar uno nuevo o modificar existente <a class="btn btn-outline-info" th:href="@{/autores/todos}">Ver ></a></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                        <div class="container mt-2 main">
+            <div class="row my-auto g-4 justify-content-evenly">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="../img/editorial.jpg" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Editoriales</h5>
+                                <p class="card-text">Ver la lista de editoriales, ingresar una nueva o modificar existente <a class="btn btn-outline-info" th:href="@{/editoriales/todas}">Ver ></a></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer th:replace="reutil :: footer"></footer>
+        <script th:src="@{/assets/bootstrap.bundle.min.js}"></script>
+    </body>
+</html>
